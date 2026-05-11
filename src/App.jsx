@@ -1,46 +1,48 @@
-import React, { useState, useEffect } from 'react'
-import './App.css'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import About from './components/About'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
-import BackToTop from './components/BackToTop'
+import React, { useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Stats from './components/Stats';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import './index.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, observerOptions);
-
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    revealElements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   return (
-   <div>
-    <Navbar/>
-    <Home/>
-    <About/>
-    <Skills/>
-    <Projects/>
-    <Contact/>
-    <BackToTop/>
-   </div>
-  )
+    <div className="app">
+      {/* Scroll Progress Bar */}
+      <motion.div className="progress-bar" style={{ scaleX }} />
+
+      {/* Background Effects */}
+      <div className="bg-glow">
+        <div className="glow-circle glow-1"></div>
+        <div className="glow-circle glow-2"></div>
+      </div>
+
+      <Navbar />
+      
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Stats />
+        <Contact />
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -3,138 +3,129 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1.5rem 0;
   z-index: 1000;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 1.5rem 0;
+  transition: var(--transition-smooth);
 }
 
 .navbar.scrolled {
   padding: 1rem 0;
-  background: var(--glass-bg);
+  background: rgba(11, 17, 32, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--glass-border);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
-.nav-logo {
+.nav-logo a {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--accent-primary);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
+  color: var(--text-primary);
+  letter-spacing: -1px;
 }
 
-.nav-logo:hover {
-  transform: scale(1.05);
-  filter: brightness(1.2);
+.nav-logo span {
+  color: var(--primary);
 }
 
-@keyframes shimmer {
-  to {
-    background-position: 200% center;
-  }
-}
-
-.nav-links {
+.desktop-menu {
   display: flex;
   gap: 2.5rem;
-  align-items: center;
+  list-style: none;
 }
 
-.nav-links li a {
-  font-size: 0.9rem;
+.desktop-menu a {
+  font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-secondary);
   position: relative;
-  padding: 0.5rem 0;
-  transition: all 0.3s ease;
 }
 
-.nav-links li a::after {
+.desktop-menu a:hover {
+  color: var(--text-primary);
+}
+
+.desktop-menu a::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 50%;
+  bottom: -4px;
+  left: 0;
   width: 0;
   height: 2px;
-  background: var(--accent-primary);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(-50%);
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  transition: var(--transition-smooth);
 }
 
-.nav-links li a:hover {
-  color: var(--text-primary);
-  transform: translateY(-2px);
-}
-
-.nav-links li a:hover::after {
+.desktop-menu a:hover::after {
   width: 100%;
 }
 
-.hamburger {
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.resume-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.mobile-toggle {
   display: none;
+  background: transparent;
+  color: var(--text-primary);
+  border: none;
   cursor: pointer;
-  z-index: 1001;
 }
 
-.bar {
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.mobile-menu ul {
+  padding: 2rem 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-menu a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
   display: block;
-  width: 25px;
-  height: 2px;
-  margin: 5px auto;
-  background-color: var(--text-primary);
-  transition: all 0.3s ease-in-out;
 }
 
-@media (max-width: 768px) {
-  .hamburger {
+@media (max-width: 992px) {
+  .desktop-menu {
+    display: none;
+  }
+  
+  .mobile-toggle {
     display: block;
   }
+}
 
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: var(--bg-secondary);
-    flex-direction: column;
-    justify-content: center;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+@media (max-width: 480px) {
+  .resume-btn span {
+    display: none;
   }
-
-  .nav-links.open {
-    right: 0;
-  }
-
-  .hamburger.open .bar:nth-child(2) {
-    opacity: 0;
-  }
-
-  .hamburger.open .bar:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-
-  .hamburger.open .bar:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+  
+  .resume-btn {
+    padding: 0.6rem;
   }
 }

@@ -1,107 +1,89 @@
-import React, { useState } from "react";
-import "./Contact.css";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Mail, Github, Linkedin, Send, MapPin, Phone } from 'lucide-react';
+import './Contact.css';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
-  const [status, setStatus] = useState("");
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("Sending...");
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "c2a5c4c0-ddeb-40d8-80db-03709036f679",
-          subject: "New Contact Form Submission from Portfolio",
-          ...formData,
-        }),
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        setStatus("Message sent successfully! 🚀");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setStatus(""), 5000);
-      } else {
-        setStatus("Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus("Error sending message.");
-    }
-  };
-
   return (
-    <section id="contact" className="contact reveal">
+    <section id="contact" className="contact">
       <div className="container">
-        <div className="contact-container">
-          <div className="contact-header">
-            <h2 className="section-title">Get In Touch</h2>
-            <p>Have a project in mind or just want to say hi? Feel free to reach out!</p>
-          </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="section-title"
+        >
+          Get In <span className="text-gradient">Touch</span>
+        </motion.h2>
 
-          <div className="contact-content">
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                  />
+        <div className="contact-container">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="contact-info"
+          >
+            <h3>Let's build something amazing together.</h3>
+            <p>
+              I'm always open to discussing new projects, creative ideas or
+              opportunities to be part of your visions.
+            </p>
+
+            <div className="contact-methods">
+              <div className="contact-method glass">
+                <Mail className="method-icon" />
+                <div>
+                  <h4>Email</h4>
+                  <p>pradeep04066@gmail.com</p>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
+              </div>
+              <div className="contact-method glass">
+                <Linkedin className="method-icon" />
+                <div>
+                  <h4>LinkedIn</h4>
+                  <p>Pradeep Kumar S</p>
                 </div>
+              </div>
+              <div className="contact-method glass">
+                <MapPin className="method-icon" />
+                <div>
+                  <h4>Location</h4>
+                  <p>Chennai, India</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="social-links">
+              <a href="https://github.com/Pradeep-Kumar-18" className="social-link glass"><Github /></a>
+              <a href="https://www.linkedin.com/in/pradeep-kumar-18official/" className="social-link glass"><Linkedin /></a>
+              <a href="mailto:[pradeep04066@gmail.com]" className="social-link glass"><Mail /></a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="contact-form-wrapper glass"
+          >
+            <form className="contact-form">
+              <div className="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe" />
               </div>
               <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project..."
-                  rows="6"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                ></textarea>
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com" />
               </div>
-              <button type="submit" className="submit-btn">
-                Send Message
-                <span>🚀</span>
+              <div className="form-group">
+                <label>Message</label>
+                <textarea rows="5" placeholder="How can I help you?"></textarea>
+              </div>
+              <button type="submit" className="btn btn-primary submit-btn">
+                Send Message <Send size={18} />
               </button>
-              {status && <div className={`form-status ${status.includes("successfully") ? "success" : "error"}`}>{status}</div>}
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
