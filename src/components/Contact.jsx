@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, Send, MapPin, Phone } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In a real application, you would send the data to a backend here.
-    alert('Thank you for your message! I will get back to you soon.');
-    e.target.reset();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", "c2a5c4c0-ddeb-40d8-80db-03709036f679");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
+      });
+      
+      const res = await response.json();
+
+      if (res.success) {
+        alert('Thank you for your message! I will get back to you soon.');
+        e.target.reset();
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      alert('Error sending message. Please check your connection.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -76,18 +106,22 @@ const Contact = () => {
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="John Doe" required />
+                <input type="text" name="name" placeholder="John Doe" required />
               </div>
               <div className="form-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="john@example.com" required />
+                <input type="email" name="email" placeholder="john@example.com" required />
               </div>
               <div className="form-group">
                 <label>Message</label>
-                <textarea rows="5" placeholder="How can I help you?" required></textarea>
+                <textarea rows="5" name="message" placeholder="How can I help you?" required></textarea>
               </div>
-              <button type="submit" className="btn btn-primary submit-btn">
-                Send Message <Send size={18} />
+              <button 
+                type="submit" 
+                className="btn btn-primary submit-btn" 
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'} <Send size={18} />
               </button>
             </form>
           </motion.div>
