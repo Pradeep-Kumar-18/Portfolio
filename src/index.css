@@ -70,6 +70,12 @@ section {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  section {
+    padding: 60px 0;
+  }
+}
+
 /* Typography Classes */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -79,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-title {
   font-size: 42px;
-  margin-bottom: 3rem;
+  margin-bottom: 3.5rem;
   text-align: center;
   position: relative;
 }
@@ -181,12 +187,25 @@ button, .btn {
   gap: 2rem;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 @media (max-width: 768px) {
   .section-title {
     font-size: 32px;
+    margin-bottom: 2.5rem;
   }
   
   .container {
     padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 28px;
   }
 }

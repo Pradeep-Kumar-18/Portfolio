@@ -196,5 +196,16 @@
   
   .hero-btns {
     flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
   }
 }
