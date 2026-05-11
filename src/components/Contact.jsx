@@ -4,6 +4,13 @@ import { Mail, Github, Linkedin, Send, MapPin, Phone } from 'lucide-react';
 import './Contact.css';
 
 const Contact = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // In a real application, you would send the data to a backend here.
+    alert('Thank you for your message! I will get back to you soon.');
+    e.target.reset();
+  };
+
   return (
     <section id="contact" className="contact">
       <div className="container">
@@ -56,7 +63,7 @@ const Contact = () => {
             <div className="social-links">
               <a href="https://github.com/Pradeep-Kumar-18" className="social-link glass"><Github /></a>
               <a href="https://www.linkedin.com/in/pradeep-kumar-18official/" className="social-link glass"><Linkedin /></a>
-              <a href="mailto:[pradeep04066@gmail.com]" className="social-link glass"><Mail /></a>
+              <a href="mailto:pradeep04066@gmail.com" className="social-link glass"><Mail /></a>
             </div>
           </motion.div>
 
@@ -66,18 +73,18 @@ const Contact = () => {
             viewport={{ once: true }}
             className="contact-form-wrapper glass"
           >
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Full Name</label>
-                <input type="text" placeholder="John Doe" />
+                <input type="text" placeholder="John Doe" required />
               </div>
               <div className="form-group">
                 <label>Email Address</label>
-                <input type="email" placeholder="john@example.com" />
+                <input type="email" placeholder="john@example.com" required />
               </div>
               <div className="form-group">
                 <label>Message</label>
-                <textarea rows="5" placeholder="How can I help you?"></textarea>
+                <textarea rows="5" placeholder="How can I help you?" required></textarea>
               </div>
               <button type="submit" className="btn btn-primary submit-btn">
                 Send Message <Send size={18} />
