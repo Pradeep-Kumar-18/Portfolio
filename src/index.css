@@ -194,18 +194,26 @@ img {
 }
 
 @media (max-width: 768px) {
-  .section-title {
-    font-size: 32px;
-    margin-bottom: 2.5rem;
+  section {
+    padding: 60px 0;
   }
   
   .container {
-    padding: 0 1.5rem;
+    padding: 0 1.25rem;
+  }
+
+  .section-title {
+    font-size: 32px;
+    margin-bottom: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .section-title {
     font-size: 28px;
+  }
+  
+  .container {
+    padding: 0 1rem;
   }
 }

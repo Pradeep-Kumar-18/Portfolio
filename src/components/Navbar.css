@@ -113,6 +113,14 @@
 }
 
 @media (max-width: 992px) {
+  .navbar {
+    padding: 1rem 0;
+    background: rgba(11, 17, 32, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
   .desktop-menu {
     display: none;
   }
@@ -123,11 +131,19 @@
 }
 
 @media (max-width: 480px) {
+  .nav-logo a {
+    font-size: 1.25rem;
+  }
+
   .resume-btn span {
     display: none;
   }
   
   .resume-btn {
     padding: 0.6rem;
+  }
+
+  .mobile-toggle {
+    padding: 0.5rem;
   }
 }

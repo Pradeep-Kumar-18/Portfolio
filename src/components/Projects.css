@@ -152,11 +152,39 @@
 }
 
 @media (max-width: 992px) {
+  .projects-list {
+    gap: 3rem;
+  }
+
   .project-card {
     grid-template-columns: 1fr;
   }
   
   .project-info {
-    padding: 2rem;
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-info {
+    padding: 1.5rem;
+  }
+
+  .project-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-tags {
+    margin-bottom: 1rem;
+  }
+
+  .project-desc {
+    font-size: 0.95rem;
+  }
+  
+  .project-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
   }
 }
